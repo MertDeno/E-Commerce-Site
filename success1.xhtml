@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">      <!--After user log in to the system,he/she can see our products-->
+    <head>
+        <title>Online Shopping</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <h3>Welcome To Online Shopping.Our Products Are Here</h3>       <!-- At First,We declare our pictures.Our Products Page starts with showing products's pictures-->
+        <h:form>
+            <h:panelGrid columns="3">               
+                <h:graphicImage library="images" name="makarna.jpg" width="80"/><h:outputLabel value="Pasta"></h:outputLabel><h:outputLabel value="2 TL"></h:outputLabel>
+                <h:graphicImage library="images" name="sirke.jpg" width="70"/><h:outputLabel value="Vinegard"></h:outputLabel><h:outputLabel value="3 TL"></h:outputLabel>
+                <h:graphicImage library="images" name="pirinc1.png" width="100"/><h:outputLabel value="Rice"></h:outputLabel><h:outputLabel value="3 TL"></h:outputLabel>
+                <h:graphicImage library="images" name="yogurt.png" width="100"/><h:outputLabel value="Yoghurt"></h:outputLabel><h:outputLabel value="7.5 TL"></h:outputLabel>
+                <h:graphicImage library="images" name="et.jpg" width="120"/><h:outputLabel value="Meat"></h:outputLabel><h:outputLabel value="45 TL"></h:outputLabel>
+                <h:graphicImage library="images" name="tavuk.png" width="120"/><h:outputLabel value="Chicken"></h:outputLabel><h:outputLabel value="25 TL"></h:outputLabel>
+                <h:graphicImage library="images" name="ayran.jpg" width="100"/><h:outputLabel value="Ayran"></h:outputLabel><h:outputLabel value="3 TL"></h:outputLabel>
+                <h:graphicImage library="images" name="cikolata.png" width="120"/><h:outputLabel value="Chocolate"></h:outputLabel><h:outputLabel value="5 TL"></h:outputLabel>
+                <h:graphicImage library="images" name="zeytin.jpg" width="150"/><h:outputLabel value="Olive"></h:outputLabel><h:outputLabel value="10 TL"></h:outputLabel>
+                <h:graphicImage library="images" name="cay.jpg" width="150"/><h:outputLabel value="Tea"></h:outputLabel><h:outputLabel value="6 TL"></h:outputLabel>
+                <h:graphicImage library="images" name="peynir.png" width="150"/><h:outputLabel value="Cheese"></h:outputLabel><h:outputLabel value="30 TL"></h:outputLabel>
+                <h:graphicImage library="images" name="icetea.jpg" width="150"/><h:outputLabel value="Icetea"></h:outputLabel><h:outputLabel value="5 TL"></h:outputLabel>
+            </h:panelGrid>
+            
+            <h3>Please Sign The Products That You Want To Add Your Cart:</h3>
+            <h:selectManyCheckbox value="#{productBean.selectedProd}">
+                <f:selectItem itemValue="#{productBean.name}" itemLabel="#{productBean.name}"/>
+                <f:selectItem itemValue="Pasta" itemLabel="Pasta"/>
+                <f:selectItem itemValue="Vinegard" itemLabel="Vinegard"/>
+                <f:selectItem itemValue="Rice" itemLabel="Rice"/>
+                <f:selectItem itemValue="Yoghurt" itemLabel="Yoghurt"/>
+                <f:selectItem itemValue="Meat" itemLabel="Meat"/>
+                <f:selectItem itemValue="Chicken" itemLabel="Chicken"/>
+                <f:selectItem itemValue="Ayran" itemLabel="Ayran"/>
+                <f:selectItem itemValue="Chocolate" itemLabel="Chocolate"/>
+                <f:selectItem itemValue="Olive" itemLabel="Olive"/> 
+            </h:selectManyCheckbox>
+            <h:commandButton value="Add" action="#{productBean.Buy()}"></h:commandButton>
+            <br></br>               
+            <!-- Then we ask the user select an item to add to his/her cart-->
+            
+            <h3>Please Click "Delete" That You Want To Delete From This Page</h3>
+            <h:dataTable value="#{productBean.proList}" var="p"
+                styleClass="order-table"
+    		headerClass="order-table-header"
+    		rowClasses="order-table-odd-row,order-table-even-row">
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    #{p.name}
+                </h:column>         <!-- And we also give a choice that a user can delete any item that he/she want or add any item to the list-->
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    #{p.price}
+                </h:column>
+                <h:column>
+                     <f:facet name="header">Action</f:facet>
+                    <h:commandLink value="Delete" action="#{productBean.Delete(p)}" /> 
+                </h:column>
+            </h:dataTable>
+            <h2>Enter A Product</h2>
+    		<table>
+    		<tr>
+                    <td>Product Name:</td>
+                    <td><h:inputText size="10" value="#{productBean.name}" /></td>
+    		</tr>
+    		<tr>
+                    <td>Price :</td>
+                    <td><h:inputText size="10" value="#{productBean.price}" /></td>
+    		</tr>
+    		</table>
+            <h:commandButton value="Add" action="#{productBean.Add()}" />       <!--These are commands for adding and going back to previous page.By the way,add commands are also above-->
+            <br></br>
+            <h:commandLink value="Back" action="#{productBean.Back()}"/>
+        </h:form>
+    </body>
+</html>
