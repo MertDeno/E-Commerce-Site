@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <head>
+        <title>Purchased Products</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <h3>Here The Products That You Added Your Cart:</h3>
+        <h:form>
+            <ui:repeat value="#{productBean.selectedProd}" var="productList" >
+                <li>#{productList}</li>
+                <h:commandLink value="Delete" action="#{productBean.Delete1(productBean.selectedProd, productList)}" /> 
+            </ui:repeat>
+            
+        <h3>If You Gave In,You Can Click Back And You Can Select Your Products Again</h3>
+        <h:commandLink value="Back" action="#{productBean.getBack()}"/>
+        </h:form>   
+        <!--After our user added any item,our program prints the selected item and he/she can delete it.(ACTUALLY I COULD NOT MANAGED TO DELETE THE ITEMS)-->
+    </body>
+</html>
